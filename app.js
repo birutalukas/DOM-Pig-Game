@@ -9,14 +9,32 @@ GAME RULES:
 
 */
 
-let scores, roundScore, activePlayer, diceDOM;
+let scores, roundScore, activePlayer, diceDOM, goalPoints;
 
 diceDOM = document.querySelector('.dice');
 
+goalPoints = 0;
+
+// Screen on load before Set the Goal Points
+function setGoal() {
+    document.getElementById('score-0').textContent = 0;
+    document.getElementById('score-1').textContent = 0;
+    document.getElementById('current-0').textContent = 0;
+    document.getElementById('current-1').textContent = 0;
+    document.querySelector('#name-0').textContent = 'Player 1';
+    document.querySelector('#name-1').textContent = 'Player 2';
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    document.querySelector('.btn-new').style.display = 'none';
+    document.querySelector('.btn-roll').style.display = 'none';
+    document.querySelector('.btn-hold').style.display = 'none';
+    hideDice();
+}
 function newGame() {
     scores = [0, 0];
     roundScore = 0;
     activePlayer = 0;
+    goalPoints = document.getElementById('goalPoints').value;
     document.getElementById('score-0').textContent = 0;
     document.getElementById('score-1').textContent = 0;
     document.getElementById('current-0').textContent = 0;
@@ -26,8 +44,11 @@ function newGame() {
     document.querySelector('.player-0-panel').classList.remove('active');
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.add('active');
+    document.querySelector('.btn-new').style.display = 'block';
     document.querySelector('.btn-roll').style.display = 'block';
     document.querySelector('.btn-hold').style.display = 'block';
+    document.querySelector('.btn-set').style.display = 'none';
+    document.getElementById('goalPoints').style.display = 'none';
     roundScoreReset();
     hideDice();
 }
@@ -42,7 +63,12 @@ function nextPlayer() {
 function hideDice() {
     diceDOM.style.display = 'none';
 }
-newGame();
+
+document.querySelector('.btn-set').addEventListener('click', function() {
+    newGame();
+});
+
+setGoal();
 
 // New Game Button
 document.querySelector('.btn-new').addEventListener('click', function() {
@@ -71,7 +97,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     // Add Round to Global Score
     scores[activePlayer] += roundScore;
     // Check for Winner
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= goalPoints) {
         document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
         document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
         roundScoreReset();
@@ -81,6 +107,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     } else {
     // Print updated Global Score
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+    hideDice();
     roundScoreReset();
     nextPlayer();
     }

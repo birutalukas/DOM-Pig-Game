@@ -137,9 +137,30 @@ i {
     transition: margin 0.3s;
 }
 
+input {
+    position: absolute;
+    width: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #555;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #EB4D4D;
+    font-family: Lato;
+    font-size: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    font-weight: 300;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    top: 300px;
+}
+
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
+.btn-set { top: 325px;}
 
 .dice {
     position: absolute;
