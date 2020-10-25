@@ -1,5 +1,5 @@
 # DOM Pig Game
- Roll the dice and participate who first will reah 100 points.
+Roll the dice and participate with friend who first will reach the score that You manually can set up at the beginning of the game.
 
 ### GAME RULES:
 
